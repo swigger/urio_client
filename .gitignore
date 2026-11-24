@@ -1,0 +1,7 @@
+/.deps/
+/connect/
+/bin/
+/.runtime/
+/config.yaml
+/task.txt
+*.exe

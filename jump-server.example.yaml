@@ -1,0 +1,6 @@
+# Generate: urio keygen > jump.psk
+jump_server:
+  listen: 0.0.0.0:7443
+  psk_file: jump.psk
+  max_connections: 256
+  allow_private: false

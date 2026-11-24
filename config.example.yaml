@@ -1,0 +1,33 @@
+# Copy to config.yaml. Omit password to use the OS credential store / hidden prompt.
+account:
+  email: you@example.com
+# password: is nested under account, if explicitly needed for unattended use.
+listen: 127.0.0.1:1080
+log_level: info # debug, info, warn, error; logs go to stderr.
+exit:
+  # All proxy / TUN traffic stays on one healthy provider for this run.
+  # On startup or failover, randomly draw a new candidate from the eligible pool.
+  # Reconnect the current provider first; select another only after failure.
+  # Run: urio cities --query Singapore --select
+  # location_id: "UUID from the city selector"
+  # Or use an exact city name plus a country name / ISO code:
+  # city: Singapore
+  # country: SG
+tun:
+  enabled: false
+  name: urio # On macOS, use utun or utunN.
+  address: 172.31.255.1/30
+  mtu: 1280
+  auto_route: false
+  # DNS is served inside the TUN, not on the host's port 53.
+  dns_enabled: true
+  # Default: an unused host address in the TUN subnet (172.31.255.2 here).
+  # dns_address: 172.31.255.2
+  # Both UDP and TCP client queries use HTTPS through the same ur.io exit.
+  dns_upstream: https://1.1.1.1/dns-query
+  # Required for auto_route; physical uplink name (e.g. Ethernet, eth0, en0).
+  # interface: Ethernet
+# All ur.io control and data connections then use this encrypted relay.
+# jump:
+#   address: jump.example.com:7443
+#   psk_file: jump.psk
